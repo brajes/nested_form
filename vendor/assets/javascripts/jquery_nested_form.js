@@ -53,7 +53,15 @@ jQuery(function($) {
       return new Date().getTime();
     },
     insertFields: function(content, assoc, link) {
-      return $(content).insertBefore(link);
+      if($("#"+assoc).length == 0){
+        return $(content).insertBefore(link);
+      }
+      else {
+        c = $.trim(content);
+        c = c.replace(/<div * class="fields" *>/,'');
+        c = c.slice(0,c.length-4);
+        return $("#"+assoc).append(c);
+      }
     },
     removeFields: function(e) {
       var $link = $(e.currentTarget),
